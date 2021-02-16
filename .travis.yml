@@ -3,9 +3,9 @@ sudo: required
 service:
    - docker
 before_install:
-   #- docker build -f Dockerfile.dev -t afrozjava/afreen .
-   # for production we use 
-   - docker build -t afrozjava/afreen .
+   - docker build -f Dockerfile.dev -t afrozjava/afreen .
+   
+   
 script:
    - docker run -e CI=true afrozjava/afreen npm run test -- --coverage
 
