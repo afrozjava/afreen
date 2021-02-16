@@ -6,3 +6,18 @@ before_install:
    - docker build -f Dockerfile.dev -t afrozjava/afreen .
 script:
    - docker run -e CI=true afrozjava/afreen npm run test -- --coverage
+
+# added following code to perform automated deployment from Travis CI to AWS 
+deploy:
+  provider: elasticbeanstalk
+  region: 'ap-south-1'
+  app: 'Docker'
+  env: 'Docker-env'
+  bucket_name: 'elasticbeanstalk-ap-south-1-246453948081'
+  bucket_path: 'Docker'
+  on:
+    branch: master
+  # following values are Travis CI environment variable where we stored AWS securet key and password  
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: 
+    secure: "$AWS_SECRET_KEY"
