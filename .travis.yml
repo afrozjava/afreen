@@ -1,0 +1,8 @@
+sudo: required
+#Sudo means - it instructs travis to provide super use to our container
+service:
+   - docker
+before_install:
+   - docker build -f Dockerfile.dev -t afrozjava/afreen .
+script:
+   - docker run -e CI=true afrozjava/afreen npm run test -- --coverage
